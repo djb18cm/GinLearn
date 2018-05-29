@@ -57,7 +57,7 @@
 	<script type="text/javascript">
 		(function($){
 			function getCacheContainer(t){
-				var view = $(t).closest('div.datagrid-view');
+				var view = $(t).closest('div.datagrid-views');
 				var c = view.children('div.datagrid-editor-cache');
 				if (!c.length){
 					c = $('<div class="datagrid-editor-cache" style="position:absolute;display:none"></div>').appendTo(view);

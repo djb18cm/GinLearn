@@ -10,8 +10,6 @@ func InitRouter() *gin.Engine {
 	router := gin.Default()
 	//Hello World
 	router.GET("/", IndexApi)
-	//渲染html页面
-	router.LoadHTMLGlob("views/*")
 
 	router.GET("/home/index", ShowHtmlPage)
 	//列表页面

@@ -13,7 +13,9 @@ func main() {
 	router := routers.InitRouter()
 
 	//静态资源
-	router.Static("/static", "./static")
+	router.Static("/static", "static")
+	//渲染html页面
+	router.LoadHTMLGlob("views/*")
 
 	//运行的端口
 	router.Run(":8000")
