@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-/**内容页面**/
+//首页
 func IndexController(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{})
 }
