@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/static/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/css/animate.min.css" rel="stylesheet">
+    <link href="/static/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link href="/static/css/sweetalert.css" rel="stylesheet">
+    <style type="text/css">
+        .logo-name{line-height: 0.8 !important;}
+        .logo-name img{width:40%;}
+        .gohome{display: none;}
+    </style>
+    <!--[if lt IE 8]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+</head>
+<body class="gray-bg">
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+        <h2>T-hack</h2>
+        <form class="m-t" role="form" action="">
+            <div class="form-group">
+                <input type="tel" class="form-control js-tel" placeholder="用户名" required="" value="">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control js-password" placeholder="密码" required="" value="">
+            </div>
+            <button type="button" class="btn btn-primary block full-width m-b" id="js-btn">登 录</button>
+            <p class="text-muted text-center">
+                <!-- 忘记密码请到客户端更改 -->
+                <a href="javascript:alert('密码都能忘 你去死吧')"><small class="js-change">忘记密码了？</small>
+            </p>
+        </form>
+    </div>
+</div>
+
+<div class="shengming" style="font-size: 12px;color: #999999;text-align: center;position: fixed;bottom:0;    width: 100%;margin-bottom: 16px;">
+    <!-- <span class="js_banquan"></span> -->
+
+</div>
+
+<script src="/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/js/bootstrap.min.js?v=3.3.5"></script>
+<script src="/static/js/sweetalert.min.js"></script>
+<script>
+    $('#js-btn').click(function(){
+        $.post("/api/user/login",
+                {
+                    phone:$('.js-tel').val(),
+                    password:$('.js-password').val()
+                },
+                function(res){
+                    // console.log(res);
+                    // console.log(res.status);
+                    if(res.status==401){
+                        swal({title:"账号密码不正确",timer: 1000,showConfirmButton: false,type:"warning"});
+                    }else{
+                        // console.log(res.token);
+                        var tokenValue=res.token;
+                        var level=res.level;
+                        var admin=res.is_admin;
+                        localStorage.setItem("token", tokenValue);
+                        localStorage.setItem("level", level);
+                        localStorage.setItem("admin", admin);
+                        window.location.href = "/index";
+                    }
+
+                },'json');
+    });
+
+    $("body").keydown(function() {
+        if (event.keyCode == "13") {//keyCode=13是回车键
+            $('#js-btn').click();
+        }
+    });
+
+</script>
+</body>
+</html>
