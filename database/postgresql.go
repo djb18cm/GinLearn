@@ -10,7 +10,7 @@ var SqlDB *sql.DB
 
 func init() {
 	var err error
-	SqlDB, err := sql.Open("postgres", "host=lol.cx user=postgres password=Thack123 dbname=Thack sslmode=disable")
+	SqlDB, err := sql.Open("postgres", "")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
